@@ -55,9 +55,24 @@ export default function EventDetailPage() {
   useEffect(() => {
     if (!eventId) return;
 
-    const event = dummyEvents.find((e) => e.id === eventId) as Event | undefined;
-    setEvent(event);
-    setLoading(false);
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`/api/events/${eventId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setEvent(data.event);
+        } else {
+          setEvent(undefined);
+        }
+      } catch (error) {
+        console.error("이벤트 로드 오류:", error);
+        setEvent(undefined);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
   }, [eventId]);
 
   const handleDelete = async () => {

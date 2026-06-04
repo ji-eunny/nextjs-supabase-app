@@ -1,4 +1,6 @@
 // 임시 in-memory 이벤트 저장소
+import { dummyEvents } from "./dummy-data";
+
 interface Event {
   id: string;
   group_id: string;
@@ -16,7 +18,8 @@ interface Event {
   updated_at?: string;
 }
 
-let events: Event[] = [];
+// 더미 데이터를 초기 데이터로 로드
+let events: Event[] = [...dummyEvents];
 
 export function getAllEvents() {
   return events;

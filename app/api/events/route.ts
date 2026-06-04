@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dummyEvents } from "@/lib/dummy-data";
 import {
   getEventsByGroupId,
   getAllEvents,
@@ -28,9 +27,8 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const groupId = searchParams.get("groupId");
 
-    // 저장소의 이벤트 + 더미 데이터 합치기
-    const storedEvents = getAllEvents();
-    let allEvents = [...dummyEvents, ...storedEvents];
+    // 저장소의 이벤트만 사용
+    let allEvents = getAllEvents();
 
     if (groupId) {
       allEvents = allEvents.filter((e) => e.group_id === groupId);

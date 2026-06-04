@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dummyEvents } from "@/lib/dummy-data";
 import {
   getEventById,
   updateEvent,
@@ -13,13 +12,8 @@ export async function GET(
   try {
     const { eventId } = await params;
 
-    // 저장소에서 먼저 찾기
-    let event = getEventById(eventId);
-
-    // 저장소에 없으면 더미 데이터에서 찾기
-    if (!event) {
-      event = dummyEvents.find((e) => e.id === eventId);
-    }
+    // 저장소에서 찾기
+    const event = getEventById(eventId);
 
     if (event) {
       return NextResponse.json({ event });
@@ -56,13 +50,8 @@ export async function PATCH(
       carpool_enabled,
     } = body;
 
-    // 저장소에서 먼저 찾기
-    let event = getEventById(eventId);
-
-    // 저장소에 없으면 더미 데이터에서 찾기
-    if (!event) {
-      event = dummyEvents.find((e) => e.id === eventId);
-    }
+    // 저장소에서 찾기
+    const event = getEventById(eventId);
 
     if (!event) {
       return NextResponse.json(

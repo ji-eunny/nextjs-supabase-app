@@ -57,20 +57,34 @@ export default function EditEventPage() {
   useEffect(() => {
     if (!eventId) return;
 
-    const foundEvent = dummyEvents.find((e) => e.id === eventId) as Event | undefined;
-    if (foundEvent) {
-      setEvent(foundEvent);
-      setFormData({
-        title: foundEvent.title,
-        description: foundEvent.description,
-        date: foundEvent.date,
-        time: foundEvent.time,
-        location: foundEvent.location,
-        max_participants: foundEvent.max_participants,
-        fee: foundEvent.fee,
-      });
-    }
-    setLoading(false);
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`/api/events/${eventId}`);
+        if (response.ok) {
+          const data = await response.json();
+          const foundEvent = data.event;
+          setEvent(foundEvent);
+          setFormData({
+            title: foundEvent.title,
+            description: foundEvent.description,
+            date: foundEvent.date,
+            time: foundEvent.time,
+            location: foundEvent.location,
+            max_participants: foundEvent.max_participants,
+            fee: foundEvent.fee,
+          });
+        } else {
+          setEvent(undefined);
+        }
+      } catch (error) {
+        console.error("이벤트 로드 오류:", error);
+        setEvent(undefined);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
   }, [eventId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
