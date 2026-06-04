@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dummyEvents } from "@/lib/dummy-data";
+import {
+  getEventsByGroupId,
+  getAllEvents,
+  addEvent,
+} from "@/lib/event-store";
 
 interface Event {
   id: string;
@@ -23,13 +28,15 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const groupId = searchParams.get("groupId");
 
-    let events = dummyEvents;
+    // 저장소의 이벤트 + 더미 데이터 합치기
+    const storedEvents = getAllEvents();
+    let allEvents = [...dummyEvents, ...storedEvents];
 
     if (groupId) {
-      events = events.filter((e) => e.group_id === groupId);
+      allEvents = allEvents.filter((e) => e.group_id === groupId);
     }
 
-    return NextResponse.json({ events });
+    return NextResponse.json({ events: allEvents });
   } catch (error) {
     console.error("이벤트 조회 오류:", error);
     return NextResponse.json(
@@ -71,6 +78,7 @@ export async function POST(request: NextRequest) {
       updated_at: new Date().toISOString(),
     };
 
+    addEvent(newEvent);
     return NextResponse.json({ event: newEvent }, { status: 201 });
   } catch (error) {
     console.error("이벤트 생성 오류:", error);

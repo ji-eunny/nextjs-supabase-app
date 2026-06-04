@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dummyEvents } from "@/lib/dummy-data";
+import {
+  getEventById,
+  updateEvent,
+  deleteEvent,
+} from "@/lib/event-store";
 
 export async function GET(
   request: NextRequest,
@@ -7,7 +12,14 @@ export async function GET(
 ) {
   try {
     const { eventId } = await params;
-    const event = dummyEvents.find((e) => e.id === eventId);
+
+    // 저장소에서 먼저 찾기
+    let event = getEventById(eventId);
+
+    // 저장소에 없으면 더미 데이터에서 찾기
+    if (!event) {
+      event = dummyEvents.find((e) => e.id === eventId);
+    }
 
     if (event) {
       return NextResponse.json({ event });
@@ -44,7 +56,13 @@ export async function PATCH(
       carpool_enabled,
     } = body;
 
-    const event = dummyEvents.find((e) => e.id === eventId);
+    // 저장소에서 먼저 찾기
+    let event = getEventById(eventId);
+
+    // 저장소에 없으면 더미 데이터에서 찾기
+    if (!event) {
+      event = dummyEvents.find((e) => e.id === eventId);
+    }
 
     if (!event) {
       return NextResponse.json(
@@ -67,6 +85,7 @@ export async function PATCH(
       updated_at: new Date().toISOString(),
     };
 
+    updateEvent(eventId, updatedEvent);
     return NextResponse.json({ event: updatedEvent });
   } catch (error) {
     console.error("이벤트 수정 오류:", error);
@@ -83,7 +102,7 @@ export async function DELETE(
 ) {
   try {
     const { eventId } = await params;
-
+    deleteEvent(eventId);
     return NextResponse.json({ message: "이벤트가 삭제되었습니다" });
   } catch (error) {
     console.error("이벤트 삭제 오류:", error);
