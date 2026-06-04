@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
+import { dummyEvents } from "@/lib/dummy-data";
+
+interface Event {
+  id: string;
+  group_id: string;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  max_participants: number;
+  participant_count: number;
+  waiting_count: number;
+  fee: number;
+  carpool_enabled: boolean;
+}
 
 interface FormData {
   title: string;
@@ -20,10 +36,14 @@ interface FormData {
   fee: number;
 }
 
-export default function NewEventPage() {
+export default function EditEventPage() {
   const params = useParams();
   const router = useRouter();
   const groupId = params?.groupId as string;
+  const eventId = params?.eventId as string;
+  const [event, setEvent] = useState<Event | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
@@ -33,39 +53,91 @@ export default function NewEventPage() {
     max_participants: 20,
     fee: 0,
   });
-  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (!eventId) return;
+
+    const foundEvent = dummyEvents.find((e) => e.id === eventId) as Event | undefined;
+    if (foundEvent) {
+      setEvent(foundEvent);
+      setFormData({
+        title: foundEvent.title,
+        description: foundEvent.description,
+        date: foundEvent.date,
+        time: foundEvent.time,
+        location: foundEvent.location,
+        max_participants: foundEvent.max_participants,
+        fee: foundEvent.fee,
+      });
+    }
+    setLoading(false);
+  }, [eventId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!groupId) return;
+    if (!event) return;
 
     setSaving(true);
     try {
-      const response = await fetch("/api/events", {
-        method: "POST",
+      const response = await fetch(`/api/events/${event.id}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          group_id: groupId,
-          ...formData,
-          max_participants: parseInt(formData.max_participants.toString()),
-          fee: parseInt(formData.fee.toString()),
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error("이벤트를 생성할 수 없습니다");
+        throw new Error("이벤트를 수정할 수 없습니다");
       }
 
-      const data = await response.json();
-      alert("이벤트가 생성되었습니다");
-      router.push(`/protected/groups/${groupId}`);
+      alert("이벤트가 수정되었습니다");
+      router.push(`/protected/groups/${groupId}/events/${eventId}`);
     } catch (error) {
-      console.error("이벤트 생성 오류:", error);
-      alert("이벤트를 생성할 수 없습니다");
+      console.error("수정 오류:", error);
+      alert("이벤트를 수정할 수 없습니다");
     } finally {
       setSaving(false);
     }
   };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen flex flex-col bg-background">
+        <section className="border-b bg-muted/50 px-4 py-4 sm:px-6 sm:py-6">
+          <div className="max-w-2xl mx-auto flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-10 sm:w-10" asChild>
+              <Link href={`/protected/groups/${groupId}/events/${eventId}`}>
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </Button>
+            <h1 className="text-xl sm:text-2xl font-bold">이벤트 수정</h1>
+          </div>
+        </section>
+        <section className="flex-1 px-4 py-8 sm:px-6 sm:py-12">
+          <p className="text-muted-foreground">로드 중...</p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!event) {
+    return (
+      <main className="min-h-screen flex flex-col bg-background">
+        <section className="border-b bg-muted/50 px-4 py-4 sm:px-6 sm:py-6">
+          <div className="max-w-2xl mx-auto flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-10 sm:w-10" asChild>
+              <Link href={`/protected/groups/${groupId}`}>
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </Button>
+            <h1 className="text-xl sm:text-2xl font-bold">이벤트 수정</h1>
+          </div>
+        </section>
+        <section className="flex-1 px-4 py-8 sm:px-6 sm:py-12">
+          <p className="text-muted-foreground">이벤트를 찾을 수 없습니다</p>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen flex flex-col bg-background">
@@ -73,11 +145,11 @@ export default function NewEventPage() {
       <section className="border-b bg-muted/50 px-4 py-4 sm:px-6 sm:py-6">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
           <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-10 sm:w-10" asChild>
-            <Link href={`/protected/groups/${groupId}`}>
+            <Link href={`/protected/groups/${groupId}/events/${eventId}`}>
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
-          <h1 className="text-xl sm:text-2xl font-bold">새 이벤트 만들기</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">이벤트 수정</h1>
         </div>
       </section>
 
@@ -88,7 +160,7 @@ export default function NewEventPage() {
             <CardHeader>
               <CardTitle>이벤트 정보</CardTitle>
               <CardDescription>
-                새로운 이벤트를 만들기 위해 정보를 입력하세요
+                이벤트 정보를 수정하세요
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -181,16 +253,14 @@ export default function NewEventPage() {
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
                   <Button className="flex-1 h-10 sm:h-9" type="submit" disabled={saving}>
-                    {saving ? "생성 중..." : "만들기"}
+                    {saving ? "저장 중..." : "저장"}
                   </Button>
                   <Button
                     variant="outline"
                     className="flex-1 h-10 sm:h-9"
                     asChild
                   >
-                    <Link href={`/protected/groups/${groupId}`}>
-                      취소
-                    </Link>
+                    <Link href={`/protected/groups/${groupId}/events/${eventId}`}>취소</Link>
                   </Button>
                 </div>
               </form>

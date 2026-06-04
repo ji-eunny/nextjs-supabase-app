@@ -1,23 +1,137 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dummyEvents, dummyGroups, dummyParticipants } from "@/lib/dummy-data";
-import { ArrowLeft, Calendar, MapPin, Users, Share2, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Users, Share2, CheckCircle2, Edit2, Trash2 } from "lucide-react";
 
-interface PageProps {
-  params: Promise<{
-    groupId: string;
-    eventId: string;
-  }>;
+interface Event {
+  id: string;
+  group_id: string;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  max_participants: number;
+  participant_count: number;
+  waiting_count: number;
+  fee: number;
+  carpool_enabled: boolean;
 }
 
-export default async function EventDetailPage({ params }: PageProps) {
-  const { groupId, eventId } = await params;
-  const event = dummyEvents.find((e) => e.id === eventId);
-  const group = dummyGroups.find((g) => g.id === groupId);
-  const participants = dummyParticipants.filter((p) => p.event_id === eventId);
+interface Group {
+  id: string;
+  name: string;
+  description: string;
+  max_members: number;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Participant {
+  id: string;
+  event_id: string;
+  user_id: string;
+  status: string;
+  fee_paid: boolean;
+}
+
+export default function EventDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const groupId = params?.groupId as string;
+  const eventId = params?.eventId as string;
+  const [event, setEvent] = useState<Event | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (!eventId) return;
+
+    const event = dummyEvents.find((e) => e.id === eventId) as Event | undefined;
+    setEvent(event);
+    setLoading(false);
+  }, [eventId]);
+
+  const handleDelete = async () => {
+    if (!event || !confirm("정말로 이 이벤트를 삭제하시겠습니까?")) {
+      return;
+    }
+
+    setDeleting(true);
+    try {
+      const response = await fetch(`/api/events/${event.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("이벤트를 삭제할 수 없습니다");
+      }
+
+      alert("이벤트가 삭제되었습니다");
+      router.push(`/protected/groups/${groupId}`);
+    } catch (error) {
+      console.error("삭제 오류:", error);
+      alert("이벤트를 삭제할 수 없습니다");
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen flex flex-col bg-background">
+        <section className="border-b bg-muted/50 px-4 py-4 sm:px-6 sm:py-6">
+          <div className="max-w-6xl mx-auto flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="h-9 w-9" asChild>
+              <Link href={`/protected/groups/${groupId}`}>
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+        <section className="flex-1 flex items-center justify-center px-4 py-20">
+          <p className="text-muted-foreground">로드 중...</p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!event) {
+    return (
+      <main className="min-h-screen flex flex-col bg-background">
+        <section className="border-b bg-muted/50 px-4 py-4 sm:px-6 sm:py-6">
+          <div className="max-w-6xl mx-auto flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="h-9 w-9" asChild>
+              <Link href={`/protected/groups/${groupId}`}>
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+        <section className="flex-1 flex items-center justify-center px-4 py-20">
+          <div className="text-center space-y-4">
+            <h2 className="text-xl font-semibold">이벤트를 찾을 수 없습니다</h2>
+            <Button asChild>
+              <Link href={`/protected/groups/${groupId}`}>
+                모임으로 돌아가기
+              </Link>
+            </Button>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  const group = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
+  const participants = dummyParticipants.filter((p) => p.event_id === eventId) as Participant[];
 
   if (!event || !group) {
     return (
@@ -105,13 +219,36 @@ export default async function EventDetailPage({ params }: PageProps) {
             <div className="flex flex-col sm:flex-row gap-2 pt-2">
               <Button
                 className="flex-1 h-10 sm:h-9"
-                disabled={isFull}
+                disabled={event.participant_count >= event.max_participants}
               >
-                {isFull ? "참가 불가" : "참가 신청"}
+                {event.participant_count >= event.max_participants ? "참가 불가" : "참가 신청"}
               </Button>
-              <Button variant="outline" className="flex-1 sm:flex-none h-10 sm:h-9">
+              <Button variant="outline" className="h-10 sm:h-9">
                 <Share2 className="mr-2 h-4 w-4" />
                 <span className="hidden sm:inline">공유</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-10 sm:h-9"
+                asChild
+              >
+                <Link href={`/protected/groups/${groupId}/events/${eventId}/edit`}>
+                  <Edit2 className="mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">수정</span>
+                </Link>
+              </Button>
+              <Button
+                variant="destructive"
+                size="sm"
+                className="h-10 sm:h-9"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">
+                  {deleting ? "삭제 중..." : "삭제"}
+                </span>
               </Button>
             </div>
           </div>
