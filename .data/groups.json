@@ -31,5 +31,14 @@
     "owner_id": "dummy-user-id",
     "created_at": "2026-06-05T05:32:45.278Z",
     "updated_at": "2026-06-05T05:32:45.278Z"
+  },
+  {
+    "id": "group-1780640021764",
+    "name": "testtesttest",
+    "description": "testtsettest",
+    "max_members": 20,
+    "owner_id": "dummy-user-id",
+    "created_at": "2026-06-05T06:13:41.765Z",
+    "updated_at": "2026-06-05T06:13:41.765Z"
   }
 ]
