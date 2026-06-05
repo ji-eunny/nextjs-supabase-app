@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getEventsByGroupId,
   getAllEvents,
-  createEvent,
-} from "@/lib/supabase-store";
+  addEvent,
+} from "@/lib/event-store";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,9 +13,9 @@ export async function GET(request: NextRequest) {
     let allEvents;
 
     if (groupId) {
-      allEvents = await getEventsByGroupId(groupId);
+      allEvents = getEventsByGroupId(groupId);
     } else {
-      allEvents = await getAllEvents();
+      allEvents = getAllEvents();
     }
 
     return NextResponse.json({ events: allEvents });
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const newEvent = await createEvent({
+    const newEvent = addEvent({
       id: `event-${Date.now()}`,
       group_id,
       title,
@@ -59,16 +59,13 @@ export async function POST(request: NextRequest) {
       time,
       location,
       max_participants,
+      participant_count: 0,
+      waiting_count: 0,
       fee: fee || 0,
       carpool_enabled: carpool_enabled || false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     });
-
-    if (!newEvent) {
-      return NextResponse.json(
-        { error: "이벤트를 생성할 수 없습니다" },
-        { status: 500 }
-      );
-    }
 
     return NextResponse.json({ event: newEvent }, { status: 201 });
   } catch (error) {

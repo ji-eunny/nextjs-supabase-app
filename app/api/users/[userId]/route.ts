@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUserById, updateUser, deleteUser } from "@/lib/supabase-store";
+import { getUserById, updateUser } from "@/lib/user-store";
 
 export async function GET(
   request: NextRequest,
@@ -58,27 +58,3 @@ export async function PATCH(
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ userId: string }> }
-) {
-  try {
-    const { userId } = await params;
-    const success = await deleteUser(userId);
-
-    if (success) {
-      return NextResponse.json({ message: "사용자가 삭제되었습니다" });
-    }
-
-    return NextResponse.json(
-      { error: "사용자를 삭제할 수 없습니다" },
-      { status: 500 }
-    );
-  } catch (error) {
-    console.error("사용자 삭제 오류:", error);
-    return NextResponse.json(
-      { error: "사용자를 삭제할 수 없습니다" },
-      { status: 500 }
-    );
-  }
-}
