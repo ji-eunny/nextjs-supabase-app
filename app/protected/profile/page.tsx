@@ -58,10 +58,7 @@ export default function ProfilePage() {
         }
 
         // 사용자가 참가한 이벤트 조회
-        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
-        const url = new URL(`/api/users/${CURRENT_USER_ID}/events`, window.location.origin);
-        url.searchParams.append('customEvents', JSON.stringify(customEvents));
-        const eventsResponse = await fetch(url.toString());
+        const eventsResponse = await fetch(`/api/users/${CURRENT_USER_ID}/events`);
         if (eventsResponse.ok) {
           const eventsData = await eventsResponse.json();
           setEvents(eventsData.events || []);

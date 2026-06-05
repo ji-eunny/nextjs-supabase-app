@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getGroupById, updateGroup, deleteGroup } from "@/lib/group-store";
+import { getGroupById, updateGroup, deleteGroup } from "@/lib/supabase-store-adapter";
 
 export async function GET(
   request: NextRequest,
@@ -7,26 +7,10 @@ export async function GET(
 ) {
   try {
     const { groupId: id } = await params;
-    const searchParams = request.nextUrl.searchParams;
-    const customGroupsParam = searchParams.get("customGroups");
-
-    let group = getGroupById(id);
+    const group = await getGroupById(id);
 
     if (group) {
       return NextResponse.json({ group });
-    }
-
-    // 클라이언트에서 보낸 localStorage 데이터 확인
-    if (customGroupsParam) {
-      try {
-        const customGroups = JSON.parse(decodeURIComponent(customGroupsParam));
-        group = customGroups.find((g: any) => g.id === id);
-        if (group) {
-          return NextResponse.json({ group });
-        }
-      } catch (e) {
-        console.error("커스텀 그룹 파싱 오류:", e);
-      }
     }
 
     return NextResponse.json(
@@ -51,11 +35,10 @@ export async function PATCH(
     const body = await request.json();
     const { name, description, max_members } = body;
 
-    const updatedGroup = updateGroup(id, {
+    const updatedGroup = await updateGroup(id, {
       name: name || undefined,
       description: description || undefined,
       max_members: max_members ? parseInt(max_members) : undefined,
-      updated_at: new Date().toISOString(),
     });
 
     if (updatedGroup) {
@@ -81,8 +64,9 @@ export async function DELETE(
 ) {
   try {
     const { groupId: id } = await params;
+    const success = await deleteGroup(id);
 
-    if (deleteGroup(id)) {
+    if (success) {
       return NextResponse.json({ message: "모임이 삭제되었습니다" });
     }
 

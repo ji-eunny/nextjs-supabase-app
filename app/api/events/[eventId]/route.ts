@@ -3,7 +3,7 @@ import {
   getEventById,
   updateEvent,
   deleteEvent,
-} from "@/lib/event-store";
+} from "@/lib/supabase-store-adapter";
 
 export async function GET(
   request: NextRequest,
@@ -11,27 +11,10 @@ export async function GET(
 ) {
   try {
     const { eventId } = await params;
-    const searchParams = request.nextUrl.searchParams;
-    const customEventsParam = searchParams.get("customEvents");
-
-    // 저장소에서 찾기
-    let event = getEventById(eventId);
+    const event = await getEventById(eventId);
 
     if (event) {
       return NextResponse.json({ event });
-    }
-
-    // 클라이언트에서 보낸 localStorage 데이터 확인
-    if (customEventsParam) {
-      try {
-        const customEvents = JSON.parse(decodeURIComponent(customEventsParam));
-        event = customEvents.find((e: any) => e.id === eventId);
-        if (event) {
-          return NextResponse.json({ event });
-        }
-      } catch (e) {
-        console.error("커스텀 이벤트 파싱 오류:", e);
-      }
     }
 
     return NextResponse.json(
@@ -65,8 +48,7 @@ export async function PATCH(
       carpool_enabled,
     } = body;
 
-    // 저장소에서 찾기
-    const event = getEventById(eventId);
+    const event = await getEventById(eventId);
 
     if (!event) {
       return NextResponse.json(
@@ -75,8 +57,7 @@ export async function PATCH(
       );
     }
 
-    const updatedEvent = {
-      ...event,
+    const updatedEvent = await updateEvent(eventId, {
       title: title || event.title,
       description: description || event.description,
       date: date || event.date,
@@ -86,11 +67,16 @@ export async function PATCH(
       fee: fee !== undefined ? fee : event.fee,
       carpool_enabled:
         carpool_enabled !== undefined ? carpool_enabled : event.carpool_enabled,
-      updated_at: new Date().toISOString(),
-    };
+    });
 
-    updateEvent(eventId, updatedEvent);
-    return NextResponse.json({ event: updatedEvent });
+    if (updatedEvent) {
+      return NextResponse.json({ event: updatedEvent });
+    }
+
+    return NextResponse.json(
+      { error: "이벤트를 수정할 수 없습니다" },
+      { status: 500 }
+    );
   } catch (error) {
     console.error("이벤트 수정 오류:", error);
     return NextResponse.json(
@@ -106,8 +92,16 @@ export async function DELETE(
 ) {
   try {
     const { eventId } = await params;
-    deleteEvent(eventId);
-    return NextResponse.json({ message: "이벤트가 삭제되었습니다" });
+    const success = await deleteEvent(eventId);
+
+    if (success) {
+      return NextResponse.json({ message: "이벤트가 삭제되었습니다" });
+    }
+
+    return NextResponse.json(
+      { error: "이벤트를 삭제할 수 없습니다" },
+      { status: 500 }
+    );
   } catch (error) {
     console.error("이벤트 삭제 오류:", error);
     return NextResponse.json(

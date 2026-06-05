@@ -15,6 +15,8 @@ export const dummyGroups = [
     owner_id: "user-1",
     next_event_title: "북한산 등산",
     next_event_at: "2026-06-08T08:00:00Z",
+    created_at: "2026-05-01T00:00:00Z",
+    updated_at: "2026-05-01T00:00:00Z",
   },
   {
     id: "group-2",
@@ -25,6 +27,8 @@ export const dummyGroups = [
     owner_id: "user-2",
     next_event_title: "월요일 PT",
     next_event_at: "2026-06-02T19:00:00Z",
+    created_at: "2026-05-02T00:00:00Z",
+    updated_at: "2026-05-02T00:00:00Z",
   },
 ];
 
@@ -42,6 +46,8 @@ export const dummyEvents = [
     waiting_count: 0,
     fee: 5000,
     carpool_enabled: true,
+    created_at: "2026-05-01T00:00:00Z",
+    updated_at: "2026-05-01T00:00:00Z",
   },
   {
     id: "event-2",
@@ -56,6 +62,8 @@ export const dummyEvents = [
     waiting_count: 3,
     fee: 0,
     carpool_enabled: false,
+    created_at: "2026-05-02T00:00:00Z",
+    updated_at: "2026-05-02T00:00:00Z",
   },
 ];
 

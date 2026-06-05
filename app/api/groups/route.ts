@@ -1,29 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAllGroups, addGroup } from "@/lib/group-store";
+import { getAllGroups, createGroup } from "@/lib/supabase-store-adapter";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const customGroupsParam = searchParams.get("customGroups");
-
-    let groups = getAllGroups();
-
-    // 클라이언트에서 보낸 localStorage 데이터도 포함
-    if (customGroupsParam) {
-      try {
-        const customGroups = JSON.parse(decodeURIComponent(customGroupsParam));
-        // 중복 제거 (ID가 같은 것은 파일에 있는 것 사용)
-        const groupIds = new Set(groups.map(g => g.id));
-        customGroups.forEach((g: any) => {
-          if (!groupIds.has(g.id)) {
-            groups.push(g);
-          }
-        });
-      } catch (e) {
-        console.error("커스텀 그룹 파싱 오류:", e);
-      }
-    }
-
+    const groups = await getAllGroups();
     return NextResponse.json({ groups });
   } catch (error) {
     console.error("모임 목록 조회 오류:", error);
@@ -46,17 +26,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const newGroup = {
+    const newGroup = await createGroup({
       id: `group-${Date.now()}`,
       name,
       description,
       max_members: parseInt(max_members),
       owner_id: "dummy-user-id",
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
+    });
 
-    addGroup(newGroup);
+    if (!newGroup) {
+      return NextResponse.json(
+        { error: "모임을 생성할 수 없습니다" },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ group: newGroup }, { status: 201 });
   } catch (error) {
     console.error("모임 생성 오류:", error);

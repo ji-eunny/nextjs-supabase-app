@@ -7,7 +7,9 @@
     "max_members": 20,
     "owner_id": "user-1",
     "next_event_title": "북한산 등산",
-    "next_event_at": "2026-06-08T08:00:00Z"
+    "next_event_at": "2026-06-08T08:00:00Z",
+    "created_at": "2026-05-01T00:00:00Z",
+    "updated_at": "2026-05-01T00:00:00Z"
   },
   {
     "id": "group-2",
@@ -17,7 +19,9 @@
     "max_members": 15,
     "owner_id": "user-2",
     "next_event_title": "월요일 PT",
-    "next_event_at": "2026-06-02T19:00:00Z"
+    "next_event_at": "2026-06-02T19:00:00Z",
+    "created_at": "2026-05-01T00:00:00Z",
+    "updated_at": "2026-05-01T00:00:00Z"
   },
   {
     "id": "group-1780637565278",

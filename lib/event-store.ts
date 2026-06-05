@@ -15,8 +15,8 @@ interface Event {
   waiting_count: number;
   fee: number;
   carpool_enabled: boolean;
-  created_at?: string;
-  updated_at?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 const EVENTS_FILE = path.join(process.cwd(), ".data", "events.json");
