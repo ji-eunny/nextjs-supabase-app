@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAllEvents } from "@/lib/supabase-store-adapter";
+import { getAllEvents } from "@/lib/supabase-store";
 
 export async function GET(
   request: NextRequest,

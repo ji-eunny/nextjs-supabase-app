@@ -3,7 +3,7 @@ import {
   getEventsByGroupId,
   getAllEvents,
   createEvent,
-} from "@/lib/supabase-store-adapter";
+} from "@/lib/supabase-store";
 
 export async function GET(request: NextRequest) {
   try {

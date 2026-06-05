@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAllGroups, createGroup } from "@/lib/supabase-store-adapter";
+import { getAllGroups, createGroup } from "@/lib/supabase-store";
 
 export async function GET() {
   try {

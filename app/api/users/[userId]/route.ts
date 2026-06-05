@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUserById, updateUser, deleteUser } from "@/lib/supabase-store-adapter";
+import { getUserById, updateUser, deleteUser } from "@/lib/supabase-store";
 
 export async function GET(
   request: NextRequest,

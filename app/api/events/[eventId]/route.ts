@@ -3,7 +3,7 @@ import {
   getEventById,
   updateEvent,
   deleteEvent,
-} from "@/lib/supabase-store-adapter";
+} from "@/lib/supabase-store";
 
 export async function GET(
   request: NextRequest,

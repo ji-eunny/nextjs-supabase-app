@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAllUsers, createUser } from "@/lib/supabase-store-adapter";
+import { getAllUsers, createUser } from "@/lib/supabase-store";
 
 export async function GET() {
   try {
