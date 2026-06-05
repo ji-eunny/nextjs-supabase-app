@@ -57,19 +57,36 @@ export default function EventDetailPage() {
 
     const fetchEvent = async () => {
       try {
-        const response = await fetch(`/api/events/${eventId}`);
+        // localStorage 데이터도 함께 전송
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const url = new URL(`/api/events/${eventId}`, window.location.origin);
+        url.searchParams.append('customEvents', JSON.stringify(customEvents));
+        const response = await fetch(url.toString());
         if (response.ok) {
           const data = await response.json();
           setEvent(data.event);
-        } else {
-          setEvent(undefined);
+          setLoading(false);
+          return;
         }
       } catch (error) {
         console.error("이벤트 로드 오류:", error);
-        setEvent(undefined);
-      } finally {
-        setLoading(false);
       }
+
+      // API 실패 시 localStorage에서 직접 찾기
+      try {
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const foundEvent = customEvents.find((e: Event) => e.id === eventId);
+        if (foundEvent) {
+          setEvent(foundEvent);
+          setLoading(false);
+          return;
+        }
+      } catch (e) {
+        console.error("localStorage 읽기 오류:", e);
+      }
+
+      setEvent(undefined);
+      setLoading(false);
     };
 
     fetchEvent();
@@ -88,6 +105,15 @@ export default function EventDetailPage() {
 
       if (!response.ok) {
         throw new Error("이벤트를 삭제할 수 없습니다");
+      }
+
+      // localStorage에서도 삭제
+      try {
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const filteredEvents = customEvents.filter((e: Event) => e.id !== event.id);
+        localStorage.setItem("customEvents", JSON.stringify(filteredEvents));
+      } catch (e) {
+        console.error("localStorage 업데이트 오류:", e);
       }
 
       alert("이벤트가 삭제되었습니다");
@@ -145,7 +171,16 @@ export default function EventDetailPage() {
     );
   }
 
-  const group = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
+  // 그룹 정보 조회 (dummyGroups 또는 localStorage)
+  let group = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
+  if (!group) {
+    try {
+      const customGroups = JSON.parse(localStorage.getItem('customGroups') || '[]');
+      group = customGroups.find((g: Group) => g.id === groupId);
+    } catch (e) {
+      console.error('localStorage 읽기 오류:', e);
+    }
+  }
   const participants = dummyParticipants.filter((p) => p.event_id === eventId) as Participant[];
 
   if (!event || !group) {

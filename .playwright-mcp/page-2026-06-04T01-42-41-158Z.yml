@@ -1,0 +1,81 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e12]:
+        - generic [ref=e13]: 김지은
+        - link "로그아웃" [ref=e14] [cursor=pointer]:
+          - /url: /auth/login
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - link [ref=e18] [cursor=pointer]:
+        - /url: /protected/groups
+        - img
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - heading "주말 등산 동호회" [level=1] [ref=e21]
+          - paragraph [ref=e22]: 매주 주말 서울 근처 산 등산
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]:
+              - img [ref=e26]
+              - generic [ref=e31]: 최대 20명
+            - button "초대 링크" [ref=e32] [cursor=pointer]:
+              - img
+              - generic [ref=e33]: 초대 링크
+          - generic [ref=e34]:
+            - link "수정" [ref=e35] [cursor=pointer]:
+              - /url: /protected/groups/group-1/edit
+              - img
+              - generic [ref=e36]: 수정
+            - button "삭제" [disabled]:
+              - img
+              - generic: 삭제
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - heading "이벤트" [level=2] [ref=e40]
+        - link "이벤트 만들기" [ref=e41] [cursor=pointer]:
+          - /url: /protected/groups/group-1/events/new
+          - img
+          - generic [ref=e42]: 이벤트 만들기
+      - generic [ref=e43]:
+        - link "북한산 등산 북한산 정상까지 등산 5,000원 2026-06-08 08:00 12/20명 📍 북한산 입구" [ref=e44] [cursor=pointer]:
+          - /url: /protected/groups/group-1/events/event-1
+          - generic [ref=e45]:
+            - generic [ref=e47]:
+              - generic [ref=e48]:
+                - generic [ref=e49]: 북한산 등산
+                - generic [ref=e50]: 북한산 정상까지 등산
+              - generic [ref=e51]: 5,000원
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - img [ref=e54]
+                - generic [ref=e56]: 2026-06-08 08:00
+              - generic [ref=e57]:
+                - img [ref=e58]
+                - generic [ref=e63]: 12/20명
+              - paragraph [ref=e64]: 📍 북한산 입구
+        - link "산악자전거 라이딩 산악자전거 라이딩 2026-06-15 10:00 15/15명 (대기 3) 📍 여의도 한강공원" [ref=e65] [cursor=pointer]:
+          - /url: /protected/groups/group-1/events/event-2
+          - generic [ref=e66]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: 산악자전거 라이딩
+              - generic [ref=e71]: 산악자전거 라이딩
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - img [ref=e74]
+                - generic [ref=e76]: 2026-06-15 10:00
+              - generic [ref=e77]:
+                - img [ref=e78]
+                - generic [ref=e83]: 15/15명 (대기 3)
+              - paragraph [ref=e84]: 📍 여의도 한강공원
+  - button "Open Next.js Dev Tools" [ref=e90] [cursor=pointer]:
+    - img [ref=e91]

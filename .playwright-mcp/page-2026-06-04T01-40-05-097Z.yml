@@ -1,0 +1,46 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e12]:
+        - generic [ref=e13]: 김지은
+        - link "로그아웃" [ref=e14] [cursor=pointer]:
+          - /url: /auth/login
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - link [ref=e18] [cursor=pointer]:
+        - /url: /protected/groups
+        - img
+      - heading "새 모임 만들기" [level=1] [ref=e19]
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]: 모임 정보
+        - generic [ref=e25]: 새로운 모임을 만들기 위해 정보를 입력하세요
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - text: 모임명
+          - textbox "모임명" [ref=e29]:
+            - /placeholder: 모임명을 입력하세요
+          - paragraph [ref=e30]: 최대 50자
+        - generic [ref=e31]:
+          - text: 설명
+          - textbox "설명" [ref=e32]:
+            - /placeholder: 모임에 대해 설명해주세요
+          - paragraph [ref=e33]: 최대 200자
+        - generic [ref=e34]:
+          - text: 최대 멤버 수
+          - spinbutton "최대 멤버 수" [ref=e35]: "20"
+        - generic [ref=e36]:
+          - button "만들기" [ref=e37] [cursor=pointer]
+          - link "취소" [ref=e38] [cursor=pointer]:
+            - /url: /protected/groups
+  - button "Open Next.js Dev Tools" [ref=e44] [cursor=pointer]:
+    - img [ref=e45]

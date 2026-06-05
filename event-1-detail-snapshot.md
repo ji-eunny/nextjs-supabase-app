@@ -1,0 +1,67 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e30] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e26] [cursor=pointer]:
+    - img [ref=e27]
+  - alert [ref=e98]
+  - main [ref=e226]:
+    - generic [ref=e228]:
+      - link [ref=e229] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - generic [ref=e230]:
+        - generic [ref=e231]:
+          - heading "북한산 등산" [level=1] [ref=e232]
+          - paragraph [ref=e233]: 북한산 정상까지 등산
+        - generic [ref=e234]:
+          - generic [ref=e235]:
+            - img [ref=e236]
+            - generic [ref=e238]
+          - generic [ref=e241]:
+            - img [ref=e242]
+            - generic [ref=e245]
+          - generic [ref=e248]:
+            - img [ref=e249]
+            - generic [ref=e254]
+          - generic [ref=e258]:
+            - paragraph [ref=e259]: 참가비
+            - paragraph [ref=e260]: 5,000원
+        - generic [ref=e261]:
+          - button "참가 신청" [ref=e262] [cursor=pointer]
+          - button "공유" [ref=e263] [cursor=pointer]:
+            - img
+            - generic [ref=e264]: 공유
+          - link "수정" [ref=e265] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-1/edit
+            - img
+            - generic [ref=e266]: 수정
+          - button "삭제" [ref=e267] [cursor=pointer]:
+            - img
+            - generic [ref=e268]: 삭제
+    - generic [ref=e271]:
+      - tablist [ref=e272]:
+        - tab "참가자" [selected] [ref=e273] [cursor=pointer]
+        - tab "정보" [ref=e274] [cursor=pointer]
+      - tabpanel "참가자" [ref=e275]:
+        - generic [ref=e276]:
+          - generic [ref=e278]:
+            - img [ref=e279]
+            - text: 참가자 (2명)
+          - generic [ref=e285]:
+            - generic [ref=e286]
+            - generic [ref=e293]: 참가자

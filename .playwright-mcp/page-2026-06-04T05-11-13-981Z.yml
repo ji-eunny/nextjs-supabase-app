@@ -1,0 +1,28 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e56] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e52] [cursor=pointer]:
+    - img [ref=e53]
+  - alert [ref=e57]
+  - main [ref=e211]:
+    - generic [ref=e213]:
+      - link [ref=e214] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - heading "이벤트 수정" [level=1] [ref=e215]
+    - paragraph [ref=e217]: 이벤트를 찾을 수 없습니다

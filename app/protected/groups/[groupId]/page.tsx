@@ -80,54 +80,75 @@ export default function GroupDetailPage() {
     if (!groupId) return;
 
     const fetchData = async () => {
+      // localStorage에서 먼저 찾기 (빠른 로드)
+      let foundGroup: Group | undefined;
+      let customGroups: Group[] = [];
       try {
-        // API에서 그룹 조회 시도
-        const response = await fetch(`/api/groups/${groupId}`);
+        customGroups = JSON.parse(localStorage.getItem('customGroups') || '[]');
+        foundGroup = customGroups.find((g: Group) => g.id === groupId);
+      } catch (e) {
+        console.error('localStorage 읽기 오류:', e);
+      }
+
+      if (!foundGroup) {
+        foundGroup = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
+      }
+
+      // 로컬에서 찾으면 먼저 표시
+      if (foundGroup) {
+        setGroup(foundGroup);
+      }
+
+      try {
+        // API에서도 조회 시도 (최신 데이터를 위해)
+        // localStorage 데이터 포함
+        const url = new URL(`/api/groups/${groupId}`, window.location.origin);
+        url.searchParams.append('customGroups', JSON.stringify(customGroups));
+        const response = await fetch(url.toString());
+
         if (response.ok) {
           const data = await response.json();
           setGroup(data.group);
-        } else {
-          // API 실패 시 로컬 데이터에서 조회
-          let foundGroup = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
-
-          // localStorage에서 찾기 (새로 생성된 그룹)
-          if (!foundGroup) {
-            try {
-              const customGroups = JSON.parse(localStorage.getItem('customGroups') || '[]');
-              foundGroup = customGroups.find((g: Group) => g.id === groupId);
-            } catch (e) {
-              console.error('localStorage 읽기 오류:', e);
-            }
-          }
-
-          setGroup(foundGroup);
         }
       } catch (err) {
         console.error('그룹 조회 오류:', err);
-        // 에러 발생 시에도 로컬 데이터에서 조회
-        let foundGroup = dummyGroups.find((g) => g.id === groupId) as Group | undefined;
-        if (!foundGroup) {
-          try {
-            const customGroups = JSON.parse(localStorage.getItem('customGroups') || '[]');
-            foundGroup = customGroups.find((g: Group) => g.id === groupId);
-          } catch (e) {
-            console.error('localStorage 읽기 오류:', e);
-          }
-        }
-        setGroup(foundGroup);
       }
 
       // 이벤트 조회
       try {
-        const eventsResponse = await fetch(`/api/events?groupId=${groupId}`);
+        // localStorage 데이터도 함께 전송
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const url = new URL("/api/events", window.location.origin);
+        url.searchParams.append('groupId', groupId);
+        url.searchParams.append('customEvents', JSON.stringify(customEvents));
+        const eventsResponse = await fetch(url.toString());
+        let loadedEvents: Event[] = [];
+
         if (eventsResponse.ok) {
           const eventsData = await eventsResponse.json();
-          setEvents(eventsData.events || []);
+          loadedEvents = eventsData.events || [];
         } else {
           // API 실패 시 더미 데이터 사용
           const dummyGroupEvents = dummyEvents.filter((e) => e.group_id === groupId);
-          setEvents(dummyGroupEvents as Event[]);
+          loadedEvents = dummyGroupEvents as Event[];
+
+          // localStorage의 이벤트도 추가 (새로 생성된 이벤트)
+          try {
+            const customGroupEvents = customEvents.filter((e: Event) => e.group_id === groupId);
+
+            // 중복 제거 (API에서 받은 것과 localStorage의 것이 겹칠 수 있음)
+            const eventIds = new Set(loadedEvents.map(e => e.id));
+            customGroupEvents.forEach((e: Event) => {
+              if (!eventIds.has(e.id)) {
+                loadedEvents.push(e);
+              }
+            });
+          } catch (e) {
+            console.error("localStorage 읽기 오류:", e);
+          }
         }
+
+        setEvents(loadedEvents);
       } catch (err) {
         console.error('이벤트 조회 오류:', err);
         // 에러 발생 시에도 더미 데이터 사용

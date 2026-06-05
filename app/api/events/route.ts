@@ -26,9 +26,26 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
     const groupId = searchParams.get("groupId");
+    const customEventsParam = searchParams.get("customEvents");
 
-    // 저장소의 이벤트만 사용
+    // 저장소의 이벤트
     let allEvents = getAllEvents();
+
+    // 클라이언트에서 보낸 localStorage 데이터도 포함
+    if (customEventsParam) {
+      try {
+        const customEvents = JSON.parse(decodeURIComponent(customEventsParam));
+        // 중복 제거 (ID가 같은 것은 파일에 있는 것 사용)
+        const eventIds = new Set(allEvents.map(e => e.id));
+        customEvents.forEach((e: any) => {
+          if (!eventIds.has(e.id)) {
+            allEvents.push(e);
+          }
+        });
+      } catch (e) {
+        console.error("커스텀 이벤트 파싱 오류:", e);
+      }
+    }
 
     if (groupId) {
       allEvents = allEvents.filter((e) => e.group_id === groupId);

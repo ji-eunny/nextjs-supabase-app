@@ -57,6 +57,16 @@ export default function NewEventPage() {
       }
 
       const data = await response.json();
+
+      // localStorage에 새 이벤트 저장 (in-memory 저장소 재초기화 대비)
+      try {
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        customEvents.push(data.event);
+        localStorage.setItem("customEvents", JSON.stringify(customEvents));
+      } catch (e) {
+        console.error("localStorage 저장 오류:", e);
+      }
+
       alert("이벤트가 생성되었습니다");
       router.push(`/protected/groups/${groupId}`);
     } catch (error) {

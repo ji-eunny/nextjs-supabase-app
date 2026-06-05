@@ -1,0 +1,7 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - heading "동호회 모임 관리 서비스" [level=1] [ref=e4]
+      - paragraph [ref=e5]: 모임 관리를 쉽게 해보세요
+  - button "Open Next.js Dev Tools" [ref=e11] [cursor=pointer]:
+    - img [ref=e12]

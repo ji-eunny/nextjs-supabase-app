@@ -1,0 +1,65 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e30] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e26] [cursor=pointer]:
+    - img [ref=e27]
+  - alert [ref=e31]
+  - main [ref=e167]:
+    - generic [ref=e169]:
+      - link [ref=e170] [cursor=pointer]:
+        - /url: /protected/groups/group-1/events/event-1
+        - img
+      - heading "이벤트 수정" [level=1] [ref=e171]
+    - generic [ref=e174]:
+      - generic [ref=e175]:
+        - generic [ref=e176]: 이벤트 정보
+        - generic [ref=e177]: 이벤트 정보를 수정하세요
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - text: 이벤트명
+          - textbox "이벤트명" [ref=e181]:
+            - /placeholder: 이벤트명을 입력하세요
+            - text: 북한산 등산
+        - generic [ref=e182]:
+          - text: 설명
+          - textbox "설명" [ref=e183]:
+            - /placeholder: 이벤트에 대해 설명해주세요
+            - text: 북한산 정상까지 등산
+        - generic [ref=e184]:
+          - generic [ref=e185]:
+            - text: 날짜
+            - textbox "날짜" [ref=e186]: 2026-06-08
+          - generic [ref=e187]:
+            - text: 시간
+            - textbox "시간" [ref=e188]: 08:00
+        - generic [ref=e189]:
+          - text: 장소
+          - textbox "장소" [ref=e190]:
+            - /placeholder: 장소를 입력하세요
+            - text: 북한산 입구
+        - generic [ref=e191]:
+          - generic [ref=e192]:
+            - text: 최대 참가자
+            - spinbutton "최대 참가자" [ref=e193]: "20"
+          - generic [ref=e194]:
+            - text: 참가비
+            - spinbutton "참가비" [ref=e195]: "5000"
+        - generic [ref=e196]:
+          - button "저장" [ref=e197] [cursor=pointer]
+          - link "취소" [ref=e198] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-1

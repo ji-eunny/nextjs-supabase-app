@@ -1,0 +1,77 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e30] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e26] [cursor=pointer]:
+    - img [ref=e27]
+  - alert [ref=e98]
+  - main [ref=e326]:
+    - generic [ref=e328]:
+      - link [ref=e329] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - generic [ref=e330]:
+        - generic [ref=e331]:
+          - heading "북한산 등산 [2단계]" [level=1] [ref=e332]
+          - paragraph [ref=e333]: 북한산 정상까지 등산
+        - generic [ref=e334]:
+          - generic [ref=e335]:
+            - img [ref=e336]
+            - generic [ref=e338]:
+              - paragraph [ref=e339]: 날짜
+              - paragraph [ref=e340]: 2026-06-08
+          - generic [ref=e341]:
+            - img [ref=e342]
+            - generic [ref=e345]:
+              - paragraph [ref=e346]: 장소
+              - paragraph [ref=e347]: 북한산 입구
+          - generic [ref=e348]:
+            - img [ref=e349]
+            - generic [ref=e354]:
+              - paragraph [ref=e355]: 참가자
+              - paragraph [ref=e356]: 12/20
+          - generic [ref=e358]:
+            - paragraph [ref=e359]: 참가비
+            - paragraph [ref=e360]: 5,000원
+        - generic [ref=e361]:
+          - button "참가 신청" [ref=e362] [cursor=pointer]
+          - button "공유" [ref=e363] [cursor=pointer]:
+            - img
+            - generic [ref=e364]: 공유
+          - link "수정" [ref=e365] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-1/edit
+            - img
+            - generic [ref=e366]: 수정
+          - button "삭제" [ref=e367] [cursor=pointer]:
+            - img
+            - generic [ref=e368]: 삭제
+    - generic [ref=e371]:
+      - tablist [ref=e372]:
+        - tab "참가자" [selected] [ref=e373] [cursor=pointer]
+        - tab "정보" [ref=e374] [cursor=pointer]
+      - tabpanel "참가자" [ref=e375]:
+        - generic [ref=e376]:
+          - generic [ref=e378]:
+            - img [ref=e379]
+            - text: 참가자 (2명)
+          - generic [ref=e385]:
+            - generic [ref=e386]:
+              - generic [ref=e387]: 참가자
+              - generic [ref=e388]:
+                - img [ref=e389]
+                - text: 납부완료
+            - generic [ref=e393]: 참가자

@@ -59,7 +59,11 @@ export default function EditEventPage() {
 
     const fetchEvent = async () => {
       try {
-        const response = await fetch(`/api/events/${eventId}`);
+        // localStorage 데이터도 함께 전송
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const url = new URL(`/api/events/${eventId}`, window.location.origin);
+        url.searchParams.append('customEvents', JSON.stringify(customEvents));
+        const response = await fetch(url.toString());
         if (response.ok) {
           const data = await response.json();
           const foundEvent = data.event;
@@ -73,15 +77,15 @@ export default function EditEventPage() {
             max_participants: foundEvent.max_participants,
             fee: foundEvent.fee,
           });
-        } else {
-          setEvent(undefined);
+          setLoading(false);
+          return;
         }
       } catch (error) {
         console.error("이벤트 로드 오류:", error);
-        setEvent(undefined);
-      } finally {
-        setLoading(false);
       }
+
+      setEvent(undefined);
+      setLoading(false);
     };
 
     fetchEvent();
@@ -99,8 +103,33 @@ export default function EditEventPage() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error("이벤트를 수정할 수 없습니다");
+      let updatedEvent = event;
+
+      if (response.ok) {
+        const data = await response.json();
+        updatedEvent = data.event;
+      }
+
+      // API 성공 여부와 관계없이 localStorage 업데이트
+      const updatedEventData = {
+        ...event,
+        ...formData,
+        updated_at: new Date().toISOString(),
+      };
+
+      try {
+        const customEvents = JSON.parse(localStorage.getItem("customEvents") || "[]");
+        const eventIndex = customEvents.findIndex((e: Event) => e.id === event.id);
+        if (eventIndex !== -1) {
+          customEvents[eventIndex] = updatedEventData;
+          localStorage.setItem("customEvents", JSON.stringify(customEvents));
+        } else {
+          // localStorage에 없으면 추가
+          customEvents.push(updatedEventData);
+          localStorage.setItem("customEvents", JSON.stringify(customEvents));
+        }
+      } catch (e) {
+        console.error("localStorage 업데이트 오류:", e);
       }
 
       alert("이벤트가 수정되었습니다");

@@ -1,0 +1,71 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e12] [cursor=pointer]
+        - generic [ref=e13]:
+          - generic [ref=e14]: 김지은
+          - link "로그아웃" [ref=e15] [cursor=pointer]:
+            - /url: /auth/login
+  - main [ref=e16]:
+    - generic [ref=e18]:
+      - link [ref=e19] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - heading "테스트 이벤트" [level=1] [ref=e34]
+          - paragraph [ref=e35]: 이것은 새로 만든 테스트 이벤트입니다
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - img [ref=e38]
+            - generic [ref=e40]:
+              - paragraph [ref=e41]: 날짜
+              - paragraph [ref=e42]: 2026-06-20
+          - generic [ref=e43]:
+            - img [ref=e44]
+            - generic [ref=e47]:
+              - paragraph [ref=e48]: 장소
+              - paragraph [ref=e49]: 테스트 장소
+          - generic [ref=e50]:
+            - img [ref=e51]
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: 참가자
+              - paragraph [ref=e58]: 0/10
+          - generic [ref=e60]:
+            - paragraph [ref=e61]: 참가비
+            - paragraph [ref=e62]: 5,000원
+        - generic [ref=e63]:
+          - button "참가 신청" [ref=e64] [cursor=pointer]
+          - button "공유" [ref=e65] [cursor=pointer]:
+            - img
+            - generic [ref=e66]: 공유
+          - link "수정" [ref=e67] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-1780635748698/edit
+            - img
+            - generic [ref=e68]: 수정
+          - button "삭제" [ref=e69] [cursor=pointer]:
+            - img
+            - generic [ref=e70]: 삭제
+    - generic [ref=e72]:
+      - tablist [ref=e73]:
+        - tab "참가자" [selected] [ref=e74] [cursor=pointer]
+        - tab "정보" [ref=e75] [cursor=pointer]
+      - tabpanel "참가자" [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e79]:
+            - img [ref=e80]
+            - text: 참가자 (0명)
+          - paragraph [ref=e86]: 참가자가 없습니다
+  - button "Open Next.js Dev Tools" [ref=e27] [cursor=pointer]:
+    - img [ref=e28]
+  - alert [ref=e31]

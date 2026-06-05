@@ -11,12 +11,27 @@ export async function GET(
 ) {
   try {
     const { eventId } = await params;
+    const searchParams = request.nextUrl.searchParams;
+    const customEventsParam = searchParams.get("customEvents");
 
     // 저장소에서 찾기
-    const event = getEventById(eventId);
+    let event = getEventById(eventId);
 
     if (event) {
       return NextResponse.json({ event });
+    }
+
+    // 클라이언트에서 보낸 localStorage 데이터 확인
+    if (customEventsParam) {
+      try {
+        const customEvents = JSON.parse(decodeURIComponent(customEventsParam));
+        event = customEvents.find((e: any) => e.id === eventId);
+        if (event) {
+          return NextResponse.json({ event });
+        }
+      } catch (e) {
+        console.error("커스텀 이벤트 파싱 오류:", e);
+      }
     }
 
     return NextResponse.json(

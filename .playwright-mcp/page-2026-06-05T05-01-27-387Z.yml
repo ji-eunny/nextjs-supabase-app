@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e12] [cursor=pointer]
+        - generic [ref=e13]:
+          - generic [ref=e14]: 김지은
+          - link "로그아웃" [ref=e15] [cursor=pointer]:
+            - /url: /auth/login
+  - main [ref=e16]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "내 모임" [level=1] [ref=e21]
+        - paragraph [ref=e22]: 3개의 모임에 가입되어 있습니다
+      - link "새 모임" [ref=e23] [cursor=pointer]:
+        - /url: /protected/groups/new
+        - img
+        - text: 새 모임
+    - generic [ref=e26]:
+      - link "주말 등산 동호회 매주 주말 서울 근처 산 등산 최대 20명 북한산 등산 6월 8일" [ref=e27] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: 주말 등산 동호회
+            - generic [ref=e31]: 매주 주말 서울 근처 산 등산
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - img [ref=e34]
+              - generic [ref=e39]: 최대 20명
+            - generic [ref=e40]:
+              - img [ref=e41]
+              - generic [ref=e43]:
+                - paragraph [ref=e44]: 북한산 등산
+                - paragraph [ref=e45]: 6월 8일
+      - link "헬스 운동 모임 함께 헬스장에서 운동하는 모임 최대 15명 월요일 PT 6월 3일" [ref=e46] [cursor=pointer]:
+        - /url: /protected/groups/group-2
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: 헬스 운동 모임
+            - generic [ref=e50]: 함께 헬스장에서 운동하는 모임
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - img [ref=e53]
+              - generic [ref=e58]: 최대 15명
+            - generic [ref=e59]:
+              - img [ref=e60]
+              - generic [ref=e62]:
+                - paragraph [ref=e63]: 월요일 PT
+                - paragraph [ref=e64]: 6월 3일
+      - link "suuuu s 최대 20명" [ref=e65] [cursor=pointer]:
+        - /url: /protected/groups/group-1780550761064
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: suuuu
+            - generic [ref=e69]: s
+          - generic [ref=e71]:
+            - img [ref=e72]
+            - generic [ref=e77]: 최대 20명
+  - button "Open Next.js Dev Tools" [ref=e83] [cursor=pointer]:
+    - img [ref=e84]
+  - alert [ref=e87]

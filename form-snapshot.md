@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e56] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - link [ref=e18] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - heading "새 이벤트 만들기" [level=1] [ref=e19]
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]: 이벤트 정보
+        - generic [ref=e25]: 새로운 이벤트를 만들기 위해 정보를 입력하세요
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - text: 이벤트명
+          - textbox "이벤트명" [ref=e29]:
+            - /placeholder: 이벤트명을 입력하세요
+        - generic [ref=e30]:
+          - text: 설명
+          - textbox "설명" [ref=e31]:
+            - /placeholder: 이벤트에 대해 설명해주세요
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - text: 날짜
+            - textbox "날짜" [ref=e34]
+          - generic [ref=e35]:
+            - text: 시간
+            - textbox "시간" [ref=e36]
+        - generic [ref=e37]:
+          - text: 장소
+          - textbox "장소" [ref=e38]:
+            - /placeholder: 장소를 입력하세요
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - text: 최대 참가자
+            - spinbutton "최대 참가자" [ref=e41]: "20"
+          - generic [ref=e42]:
+            - text: 참가비
+            - spinbutton "참가비" [ref=e43]: "0"
+        - generic [ref=e44]:
+          - button "만들기" [ref=e45] [cursor=pointer]
+          - link "취소" [ref=e46] [cursor=pointer]:
+            - /url: /protected/groups/group-1
+  - button "Open Next.js Dev Tools" [ref=e52] [cursor=pointer]:
+    - img [ref=e53]
+  - alert [ref=e57]

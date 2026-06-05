@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e12]:
+        - generic [ref=e13]: 김지은
+        - link "로그아웃" [ref=e14] [cursor=pointer]:
+          - /url: /auth/login
+  - main [ref=e15]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - heading "내 모임" [level=1] [ref=e20]
+        - paragraph [ref=e21]: 2개의 모임에 가입되어 있습니다
+      - link "새 모임" [ref=e22] [cursor=pointer]:
+        - /url: /protected/groups/new
+        - img
+        - text: 새 모임
+    - generic [ref=e25]:
+      - link "주말 등산 동호회 매주 주말 서울 근처 산 등산 최대 20명 북한산 등산 6월 8일" [ref=e26] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: 주말 등산 동호회
+            - generic [ref=e30]: 매주 주말 서울 근처 산 등산
+          - generic [ref=e31]:
+            - generic [ref=e32]:
+              - img [ref=e33]
+              - generic [ref=e38]: 최대 20명
+            - generic [ref=e39]:
+              - img [ref=e40]
+              - generic [ref=e42]:
+                - paragraph [ref=e43]: 북한산 등산
+                - paragraph [ref=e44]: 6월 8일
+      - link "헬스 운동 모임 함께 헬스장에서 운동하는 모임 최대 15명 월요일 PT 6월 3일" [ref=e45] [cursor=pointer]:
+        - /url: /protected/groups/group-2
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: 헬스 운동 모임
+            - generic [ref=e49]: 함께 헬스장에서 운동하는 모임
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e57]: 최대 15명
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - generic [ref=e61]:
+                - paragraph [ref=e62]: 월요일 PT
+                - paragraph [ref=e63]: 6월 3일
+  - button "Open Next.js Dev Tools" [ref=e69] [cursor=pointer]:
+    - img [ref=e70]

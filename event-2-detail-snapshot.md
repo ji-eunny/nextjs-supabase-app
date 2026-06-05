@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e30] [cursor=pointer]
+        - generic [ref=e12]:
+          - generic [ref=e13]: 김지은
+          - link "로그아웃" [ref=e14] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e26] [cursor=pointer]:
+    - img [ref=e27]
+  - alert [ref=e98]
+  - main [ref=e99]:
+    - generic [ref=e101]:
+      - link [ref=e102] [cursor=pointer]:
+        - /url: /protected/groups/group-1
+        - img
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - heading "산악자전거 라이딩" [level=1] [ref=e105]
+          - paragraph [ref=e106]: 산악자전거 라이딩
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - img [ref=e109]
+            - generic [ref=e111]
+          - generic [ref=e114]:
+            - img [ref=e115]
+            - generic [ref=e118]
+          - generic [ref=e121]:
+            - img [ref=e122]
+            - generic [ref=e127]
+        - generic [ref=e130]:
+          - button "참가 불가" [disabled]
+          - button "공유" [ref=e131] [cursor=pointer]:
+            - img
+            - generic [ref=e132]: 공유
+          - link "수정" [ref=e133] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-2/edit
+            - img
+            - generic [ref=e134]: 수정
+          - button "삭제" [ref=e135] [cursor=pointer]:
+            - img
+            - generic [ref=e136]: 삭제
+    - generic [ref=e139]:
+      - tablist [ref=e140]:
+        - tab "참가자" [selected] [ref=e141] [cursor=pointer]
+        - tab "정보" [ref=e142] [cursor=pointer]
+      - tabpanel "참가자" [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e146]:
+            - img [ref=e147]
+            - text: 참가자 (0명)
+          - paragraph [ref=e153]: 참가자가 없습니다

@@ -1,12 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { createGroup, getGroups } from "@/lib/services/groups";
-import { dummyGroups } from "@/lib/dummy-data";
+import { getAllGroups, addGroup } from "@/lib/group-store";
 
 export async function GET(request: NextRequest) {
   try {
-    // 개발 환경에서는 더미 데이터 반환
-    return NextResponse.json({ groups: dummyGroups });
+    const searchParams = request.nextUrl.searchParams;
+    const customGroupsParam = searchParams.get("customGroups");
+
+    let groups = getAllGroups();
+
+    // 클라이언트에서 보낸 localStorage 데이터도 포함
+    if (customGroupsParam) {
+      try {
+        const customGroups = JSON.parse(decodeURIComponent(customGroupsParam));
+        // 중복 제거 (ID가 같은 것은 파일에 있는 것 사용)
+        const groupIds = new Set(groups.map(g => g.id));
+        customGroups.forEach((g: any) => {
+          if (!groupIds.has(g.id)) {
+            groups.push(g);
+          }
+        });
+      } catch (e) {
+        console.error("커스텀 그룹 파싱 오류:", e);
+      }
+    }
+
+    return NextResponse.json({ groups });
   } catch (error) {
     console.error("모임 목록 조회 오류:", error);
     return NextResponse.json(
@@ -28,7 +46,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 개발 환경에서는 더미 그룹 생성
     const newGroup = {
       id: `group-${Date.now()}`,
       name,
@@ -39,6 +56,7 @@ export async function POST(request: NextRequest) {
       updated_at: new Date().toISOString(),
     };
 
+    addGroup(newGroup);
     return NextResponse.json({ group: newGroup }, { status: 201 });
   } catch (error) {
     console.error("모임 생성 오류:", error);

@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e65]: Login
+      - generic [ref=e66]: Enter your email below to login to your account
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e71]: Email
+          - textbox "Email" [ref=e72]:
+            - /placeholder: m@example.com
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: Password
+            - link "Forgot your password?" [ref=e76] [cursor=pointer]:
+              - /url: /auth/forgot-password
+          - textbox "Password" [ref=e77]
+        - button "Login" [ref=e78] [cursor=pointer]
+        - generic [ref=e83]: Or continue with
+        - button "Continue with Google" [ref=e84] [cursor=pointer]:
+          - img
+          - text: Continue with Google
+      - generic [ref=e85]:
+        - text: Don't have an account?
+        - link "Sign up" [ref=e86] [cursor=pointer]:
+          - /url: /auth/sign-up
+  - button "Open Next.js Dev Tools" [ref=e55] [cursor=pointer]:
+    - img [ref=e56]
+  - alert [ref=e59]

@@ -1,0 +1,65 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "모 모임" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: 모
+        - generic [ref=e7]: 모임
+      - navigation [ref=e8]:
+        - link "모임" [ref=e9] [cursor=pointer]:
+          - /url: /protected/groups
+        - link "프로필" [ref=e10] [cursor=pointer]:
+          - /url: /protected/profile
+      - generic [ref=e11]:
+        - button "🌙" [ref=e12] [cursor=pointer]
+        - generic [ref=e13]:
+          - generic [ref=e14]: 김지은
+          - link "로그아웃" [ref=e15] [cursor=pointer]:
+            - /url: /auth/login
+  - button "Open Next.js Dev Tools" [ref=e27] [cursor=pointer]:
+    - img [ref=e28]
+  - alert [ref=e31]
+  - main [ref=e87]:
+    - generic [ref=e89]:
+      - link [ref=e90] [cursor=pointer]:
+        - /url: /protected/groups/group-1/events/event-1780635748698
+        - img
+      - heading "이벤트 수정" [level=1] [ref=e91]
+    - generic [ref=e94]:
+      - generic [ref=e95]:
+        - generic [ref=e96]: 이벤트 정보
+        - generic [ref=e97]: 이벤트 정보를 수정하세요
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - text: 이벤트명
+          - textbox "이벤트명" [ref=e101]:
+            - /placeholder: 이벤트명을 입력하세요
+            - text: 테스트 이벤트
+        - generic [ref=e102]:
+          - text: 설명
+          - textbox "설명" [ref=e103]:
+            - /placeholder: 이벤트에 대해 설명해주세요
+            - text: 이것은 새로 만든 테스트 이벤트입니다
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - text: 날짜
+            - textbox "날짜" [ref=e106]: 2026-06-20
+          - generic [ref=e107]:
+            - text: 시간
+            - textbox "시간" [ref=e108]: 14:00
+        - generic [ref=e109]:
+          - text: 장소
+          - textbox "장소" [ref=e110]:
+            - /placeholder: 장소를 입력하세요
+            - text: 테스트 장소
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - text: 최대 참가자
+            - spinbutton "최대 참가자" [ref=e113]: "10"
+          - generic [ref=e114]:
+            - text: 참가비
+            - spinbutton "참가비" [ref=e115]: "5000"
+        - generic [ref=e116]:
+          - button "저장" [ref=e117] [cursor=pointer]
+          - link "취소" [ref=e118] [cursor=pointer]:
+            - /url: /protected/groups/group-1/events/event-1780635748698

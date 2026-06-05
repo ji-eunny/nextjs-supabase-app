@@ -1,0 +1,14 @@
+- generic [ref=e3]:
+  - generic [ref=e6]:
+    - heading "사이트에 연결할 수 없음" [level=1] [ref=e7]
+    - paragraph [ref=e8]: your-project.supabase.co에 오타가 있는지 확인하세요.
+    - generic [ref=e9]:
+      - paragraph
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - text: 철자가 올바르다면
+          - link "Windows 네트워크 진단을 실행" [ref=e12] [cursor=pointer]:
+            - /url: javascript:diagnoseErrors()
+          - text: 해 보세요.
+    - generic [ref=e13]: DNS_PROBE_FINISHED_NXDOMAIN
+  - button "새로고침" [ref=e16] [cursor=pointer]

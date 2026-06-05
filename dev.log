@@ -1,0 +1,239 @@
+
+> dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.74:3000
+- Environments: .env.local
+✓ Ready in 628ms
+
+ GET /protected/groups/group-1780539518237 200 in 673ms (proxy.ts: 345ms)
+ HEAD /protected/groups 200 in 166ms (next.js: 60ms, proxy.ts: 9ms, application-code: 97ms)
+ GET / 200 in 357ms (next.js: 83ms, proxy.ts: 32ms, application-code: 242ms)
+ GET /auth/login 200 in 120ms (next.js: 58ms, proxy.ts: 19ms, application-code: 43ms)
+ GET /auth/callback?code=f7af8df7-b65d-4d07-8e4e-1643cd30b58d 307 in 350ms (next.js: 155ms, proxy.ts: 16ms, application-code: 180ms)
+ GET /protected 200 in 212ms (next.js: 58ms, proxy.ts: 17ms, application-code: 137ms)
+ GET /protected/groups 200 in 67ms (next.js: 6ms, proxy.ts: 18ms, application-code: 43ms)
+ GET /protected/groups/new 200 in 106ms (next.js: 49ms, proxy.ts: 11ms, application-code: 46ms)
+ POST /api/groups 201 in 91ms (next.js: 62ms, proxy.ts: 20ms, application-code: 10ms)
+ GET /protected/groups/group-1780539665842 200 in 98ms (next.js: 32ms, proxy.ts: 15ms, application-code: 51ms)
+ GET /api/groups/group-1780539665842 404 in 835ms (next.js: 799ms, proxy.ts: 16ms, application-code: 19ms)
+ GET /api/groups/group-1780539665842 404 in 33ms (next.js: 15ms, proxy.ts: 12ms, application-code: 7ms)
+Error: Route "/protected/groups/[groupId]/events/new" used `params.groupId`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at NewEventPage (app\protected\groups\[groupId]\events\new\page.tsx:22:53)
+  20 |         <div className="max-w-2xl mx-auto flex items-center gap-3">
+  21 |           <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-10 sm:w-10" asChild>
+> 22 |             <Link href={`/protected/groups/${params.groupId}`}>
+     |                                                     ^
+  23 |               <ArrowLeft className="h-4 w-4" />
+  24 |             </Link>
+  25 |           </Button>
+ GET /protected/groups/group-1780539665842/events/new 200 in 1247ms (next.js: 1106ms, proxy.ts: 11ms, application-code: 130ms)
+Error: Route "/protected/groups/[groupId]/events/new" used `params.groupId`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at NewEventPage (app\protected\groups\[groupId]\events\new\page.tsx:22:53)
+  20 |         <div className="max-w-2xl mx-auto flex items-center gap-3">
+  21 |           <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-10 sm:w-10" asChild>
+> 22 |             <Link href={`/protected/groups/${params.groupId}`}>
+     |                                                     ^
+  23 |               <ArrowLeft className="h-4 w-4" />
+  24 |             </Link>
+  25 |           </Button>
+ GET /protected/groups/group-1780539665842/events/new? 200 in 328ms (next.js: 33ms, proxy.ts: 23ms, application-code: 272ms)
+ GET /protected/groups 200 in 65ms (next.js: 10ms, proxy.ts: 16ms, application-code: 39ms)
+ GET /protected/groups/group-1780539665842 200 in 87ms (next.js: 26ms, proxy.ts: 15ms, application-code: 46ms)
+ GET /api/groups/group-1780539665842 404 in 46ms (next.js: 21ms, proxy.ts: 13ms, application-code: 13ms)
+ GET /api/groups/group-1780539665842 404 in 33ms (next.js: 9ms, proxy.ts: 14ms, application-code: 10ms)
+ GET /protected/groups 200 in 65ms (next.js: 7ms, proxy.ts: 11ms, application-code: 47ms)
+ GET /protected/groups/group-1780539665842 200 in 97ms (next.js: 33ms, proxy.ts: 13ms, application-code: 51ms)
+ GET /api/groups/group-1780539665842 404 in 34ms (next.js: 16ms, proxy.ts: 11ms, application-code: 6ms)
+ GET /api/groups/group-1780539665842 404 in 20ms (next.js: 6ms, proxy.ts: 9ms, application-code: 5ms)
+ GET /protected/groups/group-1780539665842/edit 200 in 987ms (next.js: 950ms, proxy.ts: 12ms, application-code: 24ms)
+ GET /protected/groups/group-1780539665842 200 in 94ms (next.js: 25ms, proxy.ts: 13ms, application-code: 56ms)
+ GET /api/groups/group-1780539665842 404 in 68ms (next.js: 45ms, proxy.ts: 12ms, application-code: 11ms)
+ GET /api/groups/group-1780539665842 404 in 22ms (next.js: 7ms, proxy.ts: 9ms, application-code: 6ms)
+ GET /protected/groups/group-1780539665842 200 in 118ms (next.js: 67ms, proxy.ts: 11ms, application-code: 40ms)
+ GET /api/groups/group-1780539665842 404 in 30ms (next.js: 16ms, proxy.ts: 8ms, application-code: 6ms)
+ GET /api/groups/group-1780539665842 404 in 25ms (next.js: 9ms, proxy.ts: 9ms, application-code: 7ms)
+ GET /protected/groups 200 in 83ms (next.js: 11ms, proxy.ts: 19ms, application-code: 53ms)
+ GET /protected/groups/group-2 200 in 72ms (next.js: 27ms, proxy.ts: 9ms, application-code: 36ms)
+ GET /api/groups/group-2 200 in 37ms (next.js: 18ms, proxy.ts: 9ms, application-code: 11ms)
+ GET /api/groups/group-2 200 in 20ms (next.js: 8ms, proxy.ts: 8ms, application-code: 4ms)
+✓ Compiled in 1268ms
+ GET /protected/groups 200 in 550ms (next.js: 146ms, proxy.ts: 286ms, application-code: 118ms)
+✓ Compiled in 141ms
+ GET /protected/groups 200 in 473ms (next.js: 139ms, proxy.ts: 232ms, application-code: 102ms)
+✓ Compiled in 102ms
+ GET /protected/groups 200 in 426ms (next.js: 125ms, proxy.ts: 186ms, application-code: 115ms)
+ GET /protected/groups/group-1780539518237 200 in 248ms (next.js: 162ms, proxy.ts: 19ms, application-code: 67ms)
+ GET /api/groups/group-1780539518237 404 in 122ms (next.js: 96ms, proxy.ts: 11ms, application-code: 15ms)
+ GET /api/groups/group-1780539518237 404 in 28ms (next.js: 8ms, proxy.ts: 14ms, application-code: 6ms)
+ DELETE /api/groups/group-1780539518237 404 in 51ms (next.js: 24ms, proxy.ts: 15ms, application-code: 12ms)
+[browser] 삭제 오류: Error: 모임을 삭제할 수 없습니다
+    at handleDelete (app/protected/groups/[groupId]/page.tsx:42:15)
+  40 |
+  41 |       if (!response.ok) {
+> 42 |         throw new Error('모임을 삭제할 수 없습니다');
+     |               ^
+  43 |       }
+  44 |
+  45 |       // localStorage에서도 삭제 (app/protected/groups/[groupId]/page.tsx:56:15)
+ GET /protected/groups/group-1780539518237 200 in 347ms (next.js: 21ms, proxy.ts: 17ms, application-code: 309ms)
+ GET /api/groups/group-1780539518237 404 in 57ms (next.js: 29ms, proxy.ts: 20ms, application-code: 8ms)
+ DELETE /api/groups/group-1780539518237 404 in 49ms (next.js: 24ms, proxy.ts: 16ms, application-code: 9ms)
+[browser] 삭제 오류: Error: 모임을 삭제할 수 없습니다
+    at handleDelete (app/protected/groups/[groupId]/page.tsx:42:15)
+  40 |
+  41 |       if (!response.ok) {
+> 42 |         throw new Error('모임을 삭제할 수 없습니다');
+     |               ^
+  43 |       }
+  44 |
+  45 |       // localStorage에서도 삭제 (app/protected/groups/[groupId]/page.tsx:56:15)
+ GET /protected/groups/group-1780539518237 200 in 173ms (next.js: 28ms, proxy.ts: 14ms, application-code: 131ms)
+ GET /api/groups/group-1780539518237 404 in 53ms (next.js: 27ms, proxy.ts: 19ms, application-code: 7ms)
+ GET /protected/groups/group-1780539518237 200 in 1428ms (next.js: 36ms, proxy.ts: 1268ms, application-code: 124ms)
+ GET /api/groups/group-1780539518237 404 in 55ms (next.js: 26ms, proxy.ts: 20ms, application-code: 9ms)
+ DELETE /api/groups/group-1780539518237 404 in 53ms (next.js: 29ms, proxy.ts: 12ms, application-code: 12ms)
+[browser] 삭제 오류: Error: 모임을 삭제할 수 없습니다
+    at handleDelete (app/protected/groups/[groupId]/page.tsx:42:15)
+  40 |
+  41 |       if (!response.ok) {
+> 42 |         throw new Error('모임을 삭제할 수 없습니다');
+     |               ^
+  43 |       }
+  44 |
+  45 |       // localStorage에서도 삭제 (app/protected/groups/[groupId]/page.tsx:56:15)
+ GET /protected/groups/group-1780539518237 200 in 169ms (next.js: 25ms, proxy.ts: 11ms, application-code: 133ms)
+ GET /api/groups/group-1780539518237 404 in 43ms (next.js: 26ms, proxy.ts: 11ms, application-code: 6ms)
+ DELETE /api/groups/group-1780539518237 404 in 52ms (next.js: 29ms, proxy.ts: 13ms, application-code: 10ms)
+[browser] 삭제 오류: Error: 모임을 삭제할 수 없습니다
+    at handleDelete (app/protected/groups/[groupId]/page.tsx:42:15)
+  40 |
+  41 |       if (!response.ok) {
+> 42 |         throw new Error('모임을 삭제할 수 없습니다');
+     |               ^
+  43 |       }
+  44 |
+  45 |       // localStorage에서도 삭제 (app/protected/groups/[groupId]/page.tsx:56:15)
+ GET /protected/groups/group-1780539518237 200 in 156ms (next.js: 26ms, proxy.ts: 13ms, application-code: 117ms)
+ GET /api/groups/group-1780539518237 404 in 67ms (next.js: 41ms, proxy.ts: 17ms, application-code: 9ms)
+✓ Compiled in 145ms
+✓ Compiled in 88ms
+ GET /protected/groups/group-1780539518237 200 in 618ms (next.js: 135ms, proxy.ts: 264ms, application-code: 220ms)
+ GET /protected/groups/group-1780539518237 200 in 620ms (next.js: 202ms, proxy.ts: 279ms, application-code: 140ms)
+ GET /protected/groups/group-1780539518237 200 in 434ms (next.js: 104ms, proxy.ts: 288ms, application-code: 42ms)
+ GET /protected/groups/group-1780539518237 200 in 430ms (next.js: 62ms, proxy.ts: 282ms, application-code: 86ms)
+⚠ Failed to reload dynamic routes: Error: You cannot use different slug names for the same dynamic path ('id' !== 'groupId').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+⨯ unhandledRejection: Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+Error: You cannot use different slug names for the same dynamic path ('groupId' !== 'id').
+    at ignore-listed frames
+⚠ Failed to reload dynamic routes: Error: You cannot use different slug names for the same dynamic path ('id' !== 'groupId').
+    at ignore-listed frames
+⚠ Failed to reload dynamic routes: Error: You cannot use different slug names for the same dynamic path ('id' !== 'groupId').
+    at ignore-listed frames
+⚠ Failed to reload dynamic routes: Error: You cannot use different slug names for the same dynamic path ('id' !== 'groupId').
+    at ignore-listed frames
+⚠ Failed to reload dynamic routes: Error: You cannot use different slug names for the same dynamic path ('id' !== 'groupId').
+    at ignore-listed frames
+[?25h
